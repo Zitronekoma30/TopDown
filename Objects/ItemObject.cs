@@ -15,5 +15,18 @@ namespace Races.Objects
         public Rectangle rect;
 
         private bool active = true;
+        
+        public ItemObject(Item item, Rectangle rect, bool active)
+        {
+            this.item = item;
+            this.rect = rect;
+            this.active = active;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(item.texture, rect, Color.White);
+        }
+    
     }
 }

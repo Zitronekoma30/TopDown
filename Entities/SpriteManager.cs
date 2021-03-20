@@ -16,7 +16,7 @@ namespace Races.Entities
         public Texture2D sprmapOutside;
         
 
-        public Texture2D[] sprItems = new Texture2D[20];
+        public Texture2D[] sprItems = new Texture2D[50];
 
         
     }

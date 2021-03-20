@@ -13,14 +13,12 @@ namespace Races.Data
         public string name;
         public int rarity;
         public Texture2D texture;
-        public SpriteManager spriteManager;
 
-        public void Initialize(string name, int rarity, Texture2D texture, SpriteManager spriteManager)
+        public void Initialize(string name, int rarity, Texture2D texture)
         {
             this.name = name;
             this.rarity = rarity;
             this.texture = texture;
-            this.spriteManager = spriteManager;
         }
 
     }

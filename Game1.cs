@@ -41,6 +41,9 @@ namespace Races
 
             spriteManager.sprmapOutside = Content.Load<Texture2D>("Outside");
 
+            #region ItemSprites
+            spriteManager.sprItems[0] = Content.Load<Texture2D>("Crystal");
+            #endregion
 
             //Entities
             objectManager.Initialize(spriteManager, 32);
@@ -70,6 +73,7 @@ namespace Races
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
             floorManager.Draw(spriteBatch);
+            objectManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
 
             spriteBatch.End();

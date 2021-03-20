@@ -135,6 +135,11 @@ namespace Races.Entities
                 walkSpeed = 3;
             }
 
+            if (keyboardState.IsKeyDown(Keys.V))
+            {
+                objectManager.SpawnItem(0, new Rectangle(positionX, positionY, gridSize, gridSize));
+            }
+
             Collision();
 
             positionX += hsp * walkSpeed;

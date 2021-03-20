@@ -10,6 +10,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Data\Level.cs~RFd564b9.TMP" />
     <None Remove="Entities\ftfoncrv.tkc~" />
     <None Remove="Entities\ObjectManager.cs~RF165fc8.TMP" />
     <None Remove="Entities\ObjectManager.cs~RF183880.TMP" />

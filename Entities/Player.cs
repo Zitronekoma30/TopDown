@@ -13,7 +13,7 @@ namespace Races.Entities
 {
     class Player
     {
-        private Rectangle rect;
+        public Rectangle rect;
         private SpriteManager spriteManager;
         private Color color;
         private int gridSize;
@@ -135,10 +135,6 @@ namespace Races.Entities
                 walkSpeed = 3;
             }
 
-            if (keyboardState.IsKeyDown(Keys.V))
-            {
-                objectManager.SpawnItem(0, new Rectangle(positionX, positionY, gridSize, gridSize));
-            }
 
             Collision();
 
@@ -150,6 +146,17 @@ namespace Races.Entities
             hsp = 0;
             vsp = 0;
 
+
+            if (keyboardState.IsKeyDown(Keys.V))
+            {
+                SaveSystem.SavePlayer(this);
+            }
+            if (keyboardState.IsKeyDown(Keys.B))
+            {
+                PlayerSave data = SaveSystem.LoadPlayer();
+                positionX = data.position[0];
+                positionY = data.position[1];
+            }
 
         }
 

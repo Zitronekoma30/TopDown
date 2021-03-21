@@ -19,6 +19,7 @@ namespace Races.Entities
         private int gridSize;
         private FloorManager floorManager;
         private ObjectManager objectManager;
+        private SoundManager soundManager;
 
         private Rectangle srcRect;
 
@@ -60,7 +61,7 @@ namespace Races.Entities
 
         private State state;
 
-        public void Initialize(Rectangle rect, SpriteManager spriteManager, Color color, int gridSize, FloorManager floorManager, ObjectManager objectManager)
+        public void Initialize(Rectangle rect, SpriteManager spriteManager, Color color, int gridSize, FloorManager floorManager, ObjectManager objectManager, SoundManager soundManager)
         {
             this.rect = rect;
             this.spriteManager = spriteManager;
@@ -68,6 +69,7 @@ namespace Races.Entities
             this.gridSize = gridSize;
             this.floorManager = floorManager;
             this.objectManager = objectManager;
+            this.soundManager = soundManager;
 
             this.positionX = rect.X;
             this.positionY = rect.Y;
@@ -88,17 +90,39 @@ namespace Races.Entities
 
         public void Update()
         {
+            KeyboardState keyboardState = Keyboard.GetState();
+
             if (active)
             {
-                HandleMovement();
+                HandleMovement(keyboardState);
+                HandleInput(keyboardState);
+
 
                 rect = new Rectangle(positionX, positionY, rect.Width, rect.Height);
             }
         }
 
-        private void HandleMovement()
+        private void HandleInput(KeyboardState keyboardState)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.V))
+            {
+                SaveSystem.SavePlayer(this);
+            }
+            if (keyboardState.IsKeyDown(Keys.B))
+            {
+                PlayerSave data = SaveSystem.LoadPlayer();
+                positionX = data.position[0];
+                positionY = data.position[1];
+            }
+            if (keyboardState.IsKeyDown(Keys.C))
+            {
+                objectManager.SpawnItem(new Item("Crystal", 2, spriteManager.sprItems[0]), new Rectangle(positionX + 50, positionY, gridSize, gridSize));
+            }
+        }
+
+        private void HandleMovement(KeyboardState keyboardState)
+        {
+            
 
             if (keyboardState.IsKeyDown(Keys.D))
             {
@@ -147,16 +171,7 @@ namespace Races.Entities
             vsp = 0;
 
 
-            if (keyboardState.IsKeyDown(Keys.V))
-            {
-                SaveSystem.SavePlayer(this);
-            }
-            if (keyboardState.IsKeyDown(Keys.B))
-            {
-                PlayerSave data = SaveSystem.LoadPlayer();
-                positionX = data.position[0];
-                positionY = data.position[1];
-            }
+
 
         }
 
@@ -172,6 +187,15 @@ namespace Races.Entities
                 if (new Rectangle(rect.X, rect.Y + vsp*2, rect.Width, rect.Height).Intersects(collider.rect))
                 {
                     vsp = 0;
+                }
+            }
+
+            foreach(ItemObject itemObj in objectManager.itemObjects)
+            {
+                if (rect.Intersects(itemObj.rect) && itemObj.active)
+                {
+                    itemObj.active = !active;
+                    soundManager.playSound(soundManager.itemPickup[0]);
                 }
             }
 

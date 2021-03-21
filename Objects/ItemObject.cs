@@ -14,7 +14,7 @@ namespace Races.Objects
         public Item item;
         public Rectangle rect;
 
-        private bool active = true;
+        public bool active;
         
         public ItemObject(Item item, Rectangle rect, bool active)
         {
@@ -25,7 +25,11 @@ namespace Races.Objects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(item.texture, rect, Color.White);
+            if (active)
+            {
+                spriteBatch.Draw(item.texture, rect, Color.White);
+            }
+            
         }
     
     }

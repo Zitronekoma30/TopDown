@@ -19,27 +19,11 @@ namespace Races.Entities
 
         public List<Collider> colliders = new List<Collider>();
         public List<ItemObject> itemObjects = new List<ItemObject>();
-        public Item[] items = new Item[50];
 
         public void Initialize(SpriteManager spriteManager, int gridSize)
         {
             this.spriteManager = spriteManager;
             this.gridSize = gridSize;
-
-            #region define Items
-            for(int i = 0; i < items.Length; i++)
-            {
-                items[i] = new Item();
-                switch (i)
-                {
-                    case 0:
-                        items[0].Initialize("Crystal", 2, spriteManager.sprItems[0]);
-                        break;
-                }
-                
-            }
-
-            #endregion
 
         }
 
@@ -57,9 +41,9 @@ namespace Races.Entities
             
         }
 
-        public void SpawnItem(int index, Rectangle rect)
+        public void SpawnItem(Item item, Rectangle rect)
         {
-            itemObjects.Add(new ItemObject(items[index], rect, true));
+            itemObjects.Add(new ItemObject(item, rect, true));
         }
     }
 }

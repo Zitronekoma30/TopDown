@@ -14,7 +14,7 @@ namespace Races.Data
         public int rarity;
         public Texture2D texture;
 
-        public void Initialize(string name, int rarity, Texture2D texture)
+        public Item(string name, int rarity, Texture2D texture)
         {
             this.name = name;
             this.rarity = rarity;

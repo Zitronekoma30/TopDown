@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using Races.Entities;
 
 namespace Races
@@ -16,6 +18,8 @@ namespace Races
         private SpriteManager spriteManager = new SpriteManager();
         private FloorManager floorManager = new FloorManager();
         private ObjectManager objectManager = new ObjectManager();
+        private SoundManager soundManager = new SoundManager();
+        
 
         public Game1()
         {
@@ -37,28 +41,35 @@ namespace Races
             
             //Sprites 
             spriteManager.whitePixel = Content.Load<Texture2D>("WhitePixel");
-            spriteManager.sprPlayer = Content.Load<Texture2D>("character");
+            spriteManager.sprPlayer = Content.Load<Texture2D>("Sprites/character");
 
-            spriteManager.sprmapOutside = Content.Load<Texture2D>("Outside");
+            spriteManager.sprmapOutside = Content.Load<Texture2D>("Sprites/Outside");
 
             #region ItemSprites
-            spriteManager.sprItems[0] = Content.Load<Texture2D>("Crystal");
+            spriteManager.sprItems[0] = Content.Load<Texture2D>("Sprites/Crystal");
             #endregion
+
+            //Sounds
+
+            soundManager.itemPickup[0] = Content.Load<SoundEffect>("Sounds/Glass").CreateInstance();
 
             //Entities
             objectManager.Initialize(spriteManager, 32);
             floorManager.Initialize(spriteManager, objectManager, 32);
 
-            player.Initialize(new Rectangle(1, 1, 32, 32*2), spriteManager, Color.White, 32, floorManager, objectManager);
+            player.Initialize(new Rectangle(1, 1, 32, 32*2), spriteManager, Color.White, 32, floorManager, objectManager, soundManager);
         }
 
         protected override void Update(GameTime gameTime)
         {
+            //KeyboardState keyboardState = Keyboard.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
             player.Update();
+
+            
 
             base.Update(gameTime);
         }

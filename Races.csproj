@@ -18,6 +18,7 @@
     <None Remove="Entities\Player.cs~RF2dd1bc.TMP" />
     <None Remove="Entities\SpriteManager.cs~RF1b03090.TMP" />
     <None Remove="Entities\SpriteManager.cs~RF4b77a4.TMP" />
+    <None Remove="GUI\GUIManager.cs~RF13ae816.TMP" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Objects\Collider.cs~RF3075a3.TMP" />

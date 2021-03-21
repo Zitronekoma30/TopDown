@@ -12,16 +12,16 @@ using Races.Entities;
 
 namespace Races.Entities
 {
-    class SoundManager
+    static class SoundManager
     {
-        public SoundEffectInstance[] itemPickup = new SoundEffectInstance[20];
+        static public SoundEffectInstance[] itemPickup = new SoundEffectInstance[20];
         
-        public void playSound(SoundEffectInstance sfxInst)
+        static public void playSound(SoundEffectInstance sfxInst)
         {
             sfxInst.Play();
         }
 
-        public void stopSound(SoundEffectInstance sfxInst)
+        static public void stopSound(SoundEffectInstance sfxInst)
         {
             sfxInst.Stop();
         }

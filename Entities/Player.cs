@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using Races.Objects;
 using Races.Data;
 using System.Xml;
@@ -19,13 +20,13 @@ namespace Races.Entities
         private int gridSize;
         private FloorManager floorManager;
         private ObjectManager objectManager;
-        private SoundManager soundManager;
+
 
         private Rectangle srcRect;
 
         private bool active = true;
 
-        public Item[] inventory = new Item[3];
+        public Item[] inventory = new Item[3] {null, null, null};
 
         #region animation
         private int atlasX;
@@ -61,7 +62,7 @@ namespace Races.Entities
 
         private State state;
 
-        public void Initialize(Rectangle rect, SpriteManager spriteManager, Color color, int gridSize, FloorManager floorManager, ObjectManager objectManager, SoundManager soundManager)
+        public void Initialize(Rectangle rect, SpriteManager spriteManager, Color color, int gridSize, FloorManager floorManager, ObjectManager objectManager)
         {
             this.rect = rect;
             this.spriteManager = spriteManager;
@@ -69,7 +70,6 @@ namespace Races.Entities
             this.gridSize = gridSize;
             this.floorManager = floorManager;
             this.objectManager = objectManager;
-            this.soundManager = soundManager;
 
             this.positionX = rect.X;
             this.positionY = rect.Y;
@@ -192,13 +192,26 @@ namespace Races.Entities
 
             foreach(ItemObject itemObj in objectManager.itemObjects)
             {
-                if (rect.Intersects(itemObj.rect) && itemObj.active)
+                if (rect.Intersects(itemObj.rect) && itemObj.active && itemObj.item.name == "Crystal")
                 {
-                    itemObj.active = !active;
-                    soundManager.playSound(soundManager.itemPickup[0]);
+                    AddItemToInventory(itemObj, SoundManager.itemPickup[0]);
+
                 }
             }
 
+        }
+
+        private void AddItemToInventory(ItemObject itemObj, SoundEffectInstance sfxInst)
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                if (inventory[i] == null)
+                {
+                    itemObj.active = !active;
+                    inventory[i] = itemObj.item;
+                    SoundManager.playSound(sfxInst);
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

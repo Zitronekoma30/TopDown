@@ -18,7 +18,7 @@ namespace Races
         private SpriteManager spriteManager = new SpriteManager();
         private FloorManager floorManager = new FloorManager();
         private ObjectManager objectManager = new ObjectManager();
-        private SoundManager soundManager = new SoundManager();
+
         
 
         public Game1()
@@ -51,13 +51,13 @@ namespace Races
 
             //Sounds
 
-            soundManager.itemPickup[0] = Content.Load<SoundEffect>("Sounds/Glass").CreateInstance();
+            SoundManager.itemPickup[0] = Content.Load<SoundEffect>("Sounds/Glass").CreateInstance();
 
             //Entities
             objectManager.Initialize(spriteManager, 32);
             floorManager.Initialize(spriteManager, objectManager, 32);
 
-            player.Initialize(new Rectangle(1, 1, 32, 32*2), spriteManager, Color.White, 32, floorManager, objectManager, soundManager);
+            player.Initialize(new Rectangle(1, 1, 32, 32*2), spriteManager, Color.White, 32, floorManager, objectManager);
         }
 
         protected override void Update(GameTime gameTime)

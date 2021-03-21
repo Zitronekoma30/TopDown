@@ -8,15 +8,14 @@ using Races.Entities;
 
 namespace Races.Entities
 {
-    class SpriteManager
+    static class SpriteManager
     {
-        public Texture2D whitePixel;
-        public Texture2D sprPlayer;
+        static public Texture2D whitePixel;
+        static public Texture2D sprPlayer;
 
-        public Texture2D sprmapOutside;
+        static public Texture2D sprmapOutside;
         
-
-        public Texture2D[] sprItems = new Texture2D[50];
+        static public Texture2D[] sprItems = new Texture2D[50];
 
         
     }

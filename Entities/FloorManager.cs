@@ -22,16 +22,14 @@ namespace Races.Entities
         
         public int[][] currentLevel;
         private int gridSize;
-        private SpriteManager spriteManager;
         private ObjectManager objectManager;
 
-        public void Initialize(SpriteManager spriteManager, ObjectManager objectManager, int gridSize)
+        public void Initialize(ObjectManager objectManager, int gridSize)
         {
-            this.spriteManager = spriteManager;
             this.objectManager = objectManager;
             this.gridSize = gridSize;
 
-            switchLevel("template");
+            SwitchLevel("template");
 
         }
 
@@ -46,7 +44,7 @@ namespace Races.Entities
                 {
                     AssignGrassTiles(ref xOffset, ref yOffset, y, x);
                     AssignWaterTiles(ref xOffset, ref yOffset, y, x);
-                    spriteBatch.Draw(spriteManager.sprmapOutside, new Rectangle((x + 0) * gridSize, (y + 0) * gridSize, gridSize, gridSize), new Rectangle(0 + gridSize / 2 * xOffset, 0 + gridSize / 2 * yOffset, gridSize / 2, gridSize / 2), Color.White);
+                    spriteBatch.Draw(SpriteManager.sprmapOutside, new Rectangle((x + 0) * gridSize, (y + 0) * gridSize, gridSize, gridSize), new Rectangle(0 + gridSize / 2 * xOffset, 0 + gridSize / 2 * yOffset, gridSize / 2, gridSize / 2), Color.White);
                     //TODO: Rectangle UUID System for Collision with Player
                     
                 }
@@ -58,7 +56,7 @@ namespace Races.Entities
             }*/
         }
 
-        public void switchLevel(string levelName)
+        public void SwitchLevel(string levelName)
         {
             switch (levelName)
             {

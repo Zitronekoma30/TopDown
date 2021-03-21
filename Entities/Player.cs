@@ -15,7 +15,6 @@ namespace Races.Entities
     class Player
     {
         public Rectangle rect;
-        private SpriteManager spriteManager;
         private Color color;
         private int gridSize;
         private FloorManager floorManager;
@@ -62,10 +61,9 @@ namespace Races.Entities
 
         private State state;
 
-        public void Initialize(Rectangle rect, SpriteManager spriteManager, Color color, int gridSize, FloorManager floorManager, ObjectManager objectManager)
+        public void Initialize(Rectangle rect, Color color, int gridSize, FloorManager floorManager, ObjectManager objectManager)
         {
             this.rect = rect;
-            this.spriteManager = spriteManager;
             this.color = color;
             this.gridSize = gridSize;
             this.floorManager = floorManager;
@@ -82,7 +80,7 @@ namespace Races.Entities
 
             this.srcRect = new Rectangle(0, 0, 16 * atlasX, 32 * atlasY);
 
-            this.floorManager.switchLevel(currentLevelName);
+            this.floorManager.SwitchLevel(currentLevelName);
 
             
 
@@ -116,7 +114,7 @@ namespace Races.Entities
             }
             if (keyboardState.IsKeyDown(Keys.C))
             {
-                objectManager.SpawnItem(new Item("Crystal", 2, spriteManager.sprItems[0]), new Rectangle(positionX + 50, positionY, gridSize, gridSize));
+                objectManager.SpawnItem(new Item("Crystal", 2, SpriteManager.sprItems[0]), new Rectangle(positionX + 50, positionY, gridSize, gridSize));
             }
         }
 
@@ -209,7 +207,7 @@ namespace Races.Entities
                 {
                     itemObj.active = !active;
                     inventory[i] = itemObj.item;
-                    SoundManager.playSound(sfxInst);
+                    SoundManager.PlaySound(sfxInst);
                 }
             }
         }
@@ -220,7 +218,7 @@ namespace Races.Entities
             {
                 this.srcRect = new Rectangle(0 + atlasX, 0 + atlasY, spriteSizeX, spriteSizeY);
 
-                spriteBatch.Draw(spriteManager.sprPlayer, rect, srcRect, color);
+                spriteBatch.Draw(SpriteManager.sprPlayer, rect, srcRect, color);
 
                 //debug drawing
                 //spriteBatch.Draw(spriteManager.whitePixel, new Rectangle(positionX, positionY, 5, 5), Color.Red);

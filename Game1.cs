@@ -15,7 +15,6 @@ namespace Races
         private Player player = new Player();
 
         //Manager Classes
-        private SpriteManager spriteManager = new SpriteManager();
         private FloorManager floorManager = new FloorManager();
         private ObjectManager objectManager = new ObjectManager();
 
@@ -40,13 +39,13 @@ namespace Races
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             
             //Sprites 
-            spriteManager.whitePixel = Content.Load<Texture2D>("WhitePixel");
-            spriteManager.sprPlayer = Content.Load<Texture2D>("Sprites/character");
+            SpriteManager.whitePixel = Content.Load<Texture2D>("WhitePixel");
+            SpriteManager.sprPlayer = Content.Load<Texture2D>("Sprites/character");
 
-            spriteManager.sprmapOutside = Content.Load<Texture2D>("Sprites/Outside");
+            SpriteManager.sprmapOutside = Content.Load<Texture2D>("Sprites/Outside");
 
             #region ItemSprites
-            spriteManager.sprItems[0] = Content.Load<Texture2D>("Sprites/Crystal");
+            SpriteManager.sprItems[0] = Content.Load<Texture2D>("Sprites/Crystal");
             #endregion
 
             //Sounds
@@ -54,10 +53,10 @@ namespace Races
             SoundManager.itemPickup[0] = Content.Load<SoundEffect>("Sounds/Glass").CreateInstance();
 
             //Entities
-            objectManager.Initialize(spriteManager, 32);
-            floorManager.Initialize(spriteManager, objectManager, 32);
+            objectManager.Initialize(32);
+            floorManager.Initialize(objectManager, 32);
 
-            player.Initialize(new Rectangle(1, 1, 32, 32*2), spriteManager, Color.White, 32, floorManager, objectManager);
+            player.Initialize(new Rectangle(1, 1, 32, 32*2), Color.White, 32, floorManager, objectManager);
         }
 
         protected override void Update(GameTime gameTime)

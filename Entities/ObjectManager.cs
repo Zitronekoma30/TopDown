@@ -15,14 +15,12 @@ namespace Races.Entities
     class ObjectManager
     {
         private int gridSize;
-        private SpriteManager spriteManager;
 
         public List<Collider> colliders = new List<Collider>();
         public List<ItemObject> itemObjects = new List<ItemObject>();
 
-        public void Initialize(SpriteManager spriteManager, int gridSize)
+        public void Initialize(int gridSize)
         {
-            this.spriteManager = spriteManager;
             this.gridSize = gridSize;
 
         }

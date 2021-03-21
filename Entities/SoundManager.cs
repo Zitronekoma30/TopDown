@@ -16,12 +16,12 @@ namespace Races.Entities
     {
         static public SoundEffectInstance[] itemPickup = new SoundEffectInstance[20];
         
-        static public void playSound(SoundEffectInstance sfxInst)
+        static public void PlaySound(SoundEffectInstance sfxInst)
         {
             sfxInst.Play();
         }
 
-        static public void stopSound(SoundEffectInstance sfxInst)
+        static public void StopSound(SoundEffectInstance sfxInst)
         {
             sfxInst.Stop();
         }

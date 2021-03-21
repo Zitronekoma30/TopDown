@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Races.Entities;
 
-namespace Races.Entities
+namespace Races.Data
 {
     static class SpriteManager
     {
@@ -17,6 +17,8 @@ namespace Races.Entities
         
         static public Texture2D[] sprItems = new Texture2D[50];
 
-        
+
+        static public Texture2D inventorySlot;
+
     }
 }

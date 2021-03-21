@@ -9,13 +9,13 @@ using Races.Entities;
 namespace Races.Data
 {
     [System.Serializable]
-    class Item
+    class SerItem
     {
         public string name;
         public int rarity;
-        public Texture2D texture;
+        public int texture;
 
-        public Item(string name, int rarity, Texture2D texture)
+        public SerItem(string name, int rarity, int texture)
         {
             this.name = name;
             this.rarity = rarity;

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Races.Entities;
+using Races.Data;
 
 namespace Races
 {
@@ -43,6 +44,8 @@ namespace Races
             SpriteManager.sprPlayer = Content.Load<Texture2D>("Sprites/character");
 
             SpriteManager.sprmapOutside = Content.Load<Texture2D>("Sprites/Outside");
+
+            SpriteManager.inventorySlot = Content.Load<Texture2D>("Sprites/InventorySlot");
 
             #region ItemSprites
             SpriteManager.sprItems[0] = Content.Load<Texture2D>("Sprites/Crystal");

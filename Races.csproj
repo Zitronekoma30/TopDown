@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Data\Level.cs~RFd564b9.TMP" />
     <None Remove="Data\PlayerSave.cs~RF2f6a503.TMP" />
+    <None Remove="Data\SpriteManager.cs~RF1524e52.TMP" />
     <None Remove="Entities\ftfoncrv.tkc~" />
     <None Remove="Entities\ObjectManager.cs~RF165fc8.TMP" />
     <None Remove="Entities\ObjectManager.cs~RF183880.TMP" />
@@ -20,6 +21,7 @@
     <None Remove="Entities\SpriteManager.cs~RF1b03090.TMP" />
     <None Remove="Entities\SpriteManager.cs~RF4b77a4.TMP" />
     <None Remove="GUI\GUIManager.cs~RF13ae816.TMP" />
+    <None Remove="GUI\GUIManager.cs~RF156e1c5.TMP" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Objects\Collider.cs~RF3075a3.TMP" />

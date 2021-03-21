@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Races.Objects;
 using Races.Data;
-using System.Xml;
+using Races.GUI;
 
 
 namespace Races.Entities
@@ -25,7 +25,8 @@ namespace Races.Entities
 
         private bool active = true;
 
-        public Item[] inventory = new Item[3] {null, null, null};
+        public Item[] inventory = new Item[3];
+        public SerItem[] serInventory = new SerItem[3];
 
         #region animation
         private int atlasX;
@@ -104,17 +105,48 @@ namespace Races.Entities
         {
             if (keyboardState.IsKeyDown(Keys.V))
             {
-                SaveSystem.SavePlayer(this);
+                SavePlayerData();
             }
             if (keyboardState.IsKeyDown(Keys.B))
             {
-                PlayerSave data = SaveSystem.LoadPlayer();
-                positionX = data.position[0];
-                positionY = data.position[1];
+                LoadPlayerData();
             }
             if (keyboardState.IsKeyDown(Keys.C))
             {
                 objectManager.SpawnItem(new Item("Crystal", 2, SpriteManager.sprItems[0]), new Rectangle(positionX + 50, positionY, gridSize, gridSize));
+            }
+        }
+
+        private void SavePlayerData()
+        {
+            for(int i = 0; i < serInventory.Length; i++)
+            {
+                if(inventory[i] != null)
+                {
+                    serInventory[i] = new SerItem(inventory[i].name, inventory[i].rarity, Array.IndexOf(SpriteManager.sprItems, inventory[i].texture));
+                }
+                
+            }
+            SaveSystem.SavePlayer(this);
+        }
+
+        private void LoadPlayerData()
+        {
+            PlayerSave data = SaveSystem.LoadPlayer();
+            positionX = data.position[0];
+            positionY = data.position[1];
+
+            //inventory = data.serInventory;
+            for (int i = 0; i < data.serInventory.Length; i++)
+            {
+                if(data.serInventory[i] != null)
+                {
+                    inventory[i] = new Item(data.serInventory[i].name, data.serInventory[i].rarity, SpriteManager.sprItems[data.serInventory[i].texture]);
+                }
+                else
+                {
+                    inventory[i] = null;
+                }
             }
         }
 
@@ -224,6 +256,10 @@ namespace Races.Entities
                 //spriteBatch.Draw(spriteManager.whitePixel, new Rectangle(positionX, positionY, 5, 5), Color.Red);
                 //spriteBatch.Draw(spriteManager.whitePixel, new Rectangle(collisionPointX, positionY, 5, 5), Color.Blue);
                 //spriteBatch.Draw(spriteManager.whitePixel, new Rectangle(positionX, collisionPointY, 5, 5), Color.Violet);
+
+                //Draw Inventory
+
+                GUIManager.DrawInventory(spriteBatch, this);
             }
 
         }

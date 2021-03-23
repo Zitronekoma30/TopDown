@@ -130,13 +130,14 @@ namespace Races.Entities
         {
             //TODO implement checking for key pressed now
             bool pressed;
-            if (keyboardState.IsKeyDown(key) && !pressed)
+            /*if (keyboardState.IsKeyDown(key) && !pressed)
             {
                 
                 return true;
             }
             
             return false;
+            */
         }
 
         private void HandleInput(KeyboardState keyboardState)

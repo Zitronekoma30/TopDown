@@ -48,7 +48,8 @@ namespace Races
             SpriteManager.inventorySlot = Content.Load<Texture2D>("Sprites/InventorySlot");
 
             #region ItemSprites
-            SpriteManager.sprItems[0] = Content.Load<Texture2D>("Sprites/Crystal");
+            SpriteManager.sprItems[0] = Content.Load<Texture2D>("Sprites/Items/Crystal");
+            SpriteManager.sprItems[1] = Content.Load<Texture2D>("Sprites/Items/Fairy");
             #endregion
 
             //Sounds

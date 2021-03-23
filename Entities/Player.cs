@@ -95,10 +95,48 @@ namespace Races.Entities
             {
                 HandleMovement(keyboardState);
                 HandleInput(keyboardState);
+                SwitchInventorySlots(keyboardState);
 
 
                 rect = new Rectangle(positionX, positionY, rect.Width, rect.Height);
             }
+        }
+
+        private void SwitchInventorySlots(KeyboardState keyboardState)
+        {
+
+            if (keyboardState.IsKeyDown(Keys.D1))
+            {
+                var slot = inventory[0];
+                inventory[0] = inventory[1];
+                inventory[1] = inventory[0];
+            }
+
+            if (keyboardState.IsKeyDown(Keys.D2))
+            {
+                var slot = inventory[0];
+                inventory[0] = inventory[2];
+                inventory[2] = inventory[0];
+            }
+
+            if (keyboardState.IsKeyDown(Keys.Q) && inventory[0] != null)
+            {
+                objectManager.SpawnItem(inventory[0], new Rectangle(positionX, positionY + gridSize*3, gridSize, gridSize));
+                inventory[0] = null;
+            }
+        }
+
+        private bool KeyPressedDownNow(KeyboardState keyboardState, Keys key)
+        {
+            //TODO implement checking for key pressed now
+            bool pressed;
+            if (keyboardState.IsKeyDown(key) && !pressed)
+            {
+                
+                return true;
+            }
+            
+            return false;
         }
 
         private void HandleInput(KeyboardState keyboardState)
@@ -114,6 +152,10 @@ namespace Races.Entities
             if (keyboardState.IsKeyDown(Keys.C))
             {
                 objectManager.SpawnItem(new Item("Crystal", 2, SpriteManager.sprItems[0]), new Rectangle(positionX + 50, positionY, gridSize, gridSize));
+            }
+            if (keyboardState.IsKeyDown(Keys.X))
+            {
+                objectManager.SpawnItem(new Item("Fairy", 10, SpriteManager.sprItems[1]), new Rectangle(positionX + 50, positionY, gridSize, gridSize));
             }
         }
 
@@ -227,6 +269,12 @@ namespace Races.Entities
                     AddItemToInventory(itemObj, SoundManager.itemPickup[0]);
 
                 }
+
+                if (rect.Intersects(itemObj.rect) && itemObj.active && itemObj.item.name == "Fairy")
+                {
+                    AddItemToInventory(itemObj, SoundManager.itemPickup[0]);
+
+                }
             }
 
         }
@@ -315,5 +363,7 @@ namespace Races.Entities
         }
 
         public void ToggleActive() {active = !active;}
+
+
     }
 }
